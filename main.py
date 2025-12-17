@@ -5,8 +5,22 @@ import requests
 app = Flask(__name__)
 
 def send_ip(ip, date):
-    webhook_url = "https://discord.com/api/webhooks/1450627153438838824/cWJswEtlLVgEjPnG7zkzQJA2HLTCImHMMh8Riy7Zz8aWFJKqKYTJ7vu-eT3RCBfx7ooj"  # Replace with your actual webhook URL
-    pass
+    webhook_url = "YOUR_WEBHOOK_URL_HERE"
+
+    data = {
+        "embeds": [
+            {
+                "title": ip,
+                "description": date
+            }
+        ]
+    }
+
+    try:
+        requests.post(webhook_url, json=data, timeout=3)
+    except requests.exceptions.RequestException as e:
+        print("Webhook failed:", e)
+
 
 @app.route("/")
 def index():
